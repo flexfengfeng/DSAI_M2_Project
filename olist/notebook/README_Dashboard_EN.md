@@ -26,13 +26,13 @@ This is an integrated web dashboard that consolidates the previously scattered J
 
 ### Method 1: Using Startup Script (Recommended)
 ```bash
-cd /Users/fengfeng/Dev/DSAI_M2_Project/olist/notebook
+cd ~/olist/notebook
 python start_dashboard_en.py
 ```
 
 ### Method 2: Manual Start
 ```bash
-cd /Users/fengfeng/Dev/DSAI_M2_Project/olist/notebook
+cd ~/olist/notebook
 python -m http.server 8000
 # Then visit: http://localhost:8000/brazil_delivery_dashboard_en.html
 ```
