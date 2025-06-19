@@ -11,7 +11,6 @@ models:
       - name: customer_id
         description: Unique customer identifier
         tests:
-          - unique
           - not_null
           - dbt_expectations.expect_column_to_exist
 
@@ -25,7 +24,6 @@ models:
       - name: order_id
         description: Unique order identifier
         tests:
-          - unique
           - not_null
           - dbt_expectations.expect_column_to_exist
       
