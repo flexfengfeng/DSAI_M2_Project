@@ -159,6 +159,7 @@ class DeliveryDashboardDataGenerator:
             'stats': stats,
             'data': df.to_dict('records'),
             'states': sorted(df['state'].unique().tolist()),
+            'cities': sorted(df['city'].unique().tolist()),
             'categories': sorted(df['delivery_category'].unique().tolist())
         }
         
