@@ -77,6 +77,8 @@ dbt debug
 ```
 Verify the connection to the database and all checks passed.
 
+[Schema](/Document/Schema.png)
+
 ### Business case and problem statement
 
 Through EDA analysis, I noticed the delivery time was not consistent across all regions, since the zip code and geolocation data wasd provided, I decided to use the zip code to group the data and calculate the average delivery time for each region. 

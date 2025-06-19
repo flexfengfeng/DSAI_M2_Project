@@ -1,5 +1,9 @@
 # Brazil Regional Average Delivery Time Analysis Dashboard
 
+![Dashboard](/Document/delivery%20time%20by%20location.png)
+
+![Dashboard](/Document/revenue%20by%20location.png)
+
 ## 📋 Overview
 
 This is an integrated web dashboard that consolidates the previously scattered Jupyter notebook outputs into a unified web interface, providing intuitive data visualization and interactive functionality.
