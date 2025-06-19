@@ -20,28 +20,49 @@ class DeliveryDashboardDataGenerator:
         print("Loading data from BigQuery...")
         
         query = f"""
+        WITH delivery_data AS (
+            SELECT 
+                zip_code_prefix,
+                avg_latitude,
+                avg_longitude,
+                city,
+                state,
+                avg_delivery_days,
+                CASE 
+                    WHEN avg_delivery_days <= 10 THEN 'Fast'
+                    WHEN avg_delivery_days <= 15 THEN 'Medium'
+                    WHEN avg_delivery_days <= 20 THEN 'Slow'
+                    ELSE 'Very Slow'
+                END as delivery_category,
+                order_count
+            FROM `{self.project_id}.dbt_output.fct_delivery_time_by_zip`
+            WHERE avg_delivery_days IS NOT NULL
+              AND avg_latitude IS NOT NULL
+              AND avg_longitude IS NOT NULL
+              AND state IS NOT NULL
+              AND order_count >= 5
+        ),
+        revenue_data AS (
+            SELECT 
+                zip_code_prefix,
+                total_revenue,
+                order_count as revenue_order_count
+            FROM `{self.project_id}.dbt_output.fct_geo_revenue`
+            WHERE total_revenue IS NOT NULL
+        )
         SELECT 
-            zip_code_prefix,
-            avg_latitude,
-            avg_longitude,
-            city,
-            state,
-            avg_delivery_days,
+            d.*,
+            COALESCE(r.total_revenue, 0) as total_revenue,
             CASE 
-                WHEN avg_delivery_days <= 10 THEN 'Fast'
-                WHEN avg_delivery_days <= 15 THEN 'Medium'
-                WHEN avg_delivery_days <= 20 THEN 'Slow'
-                ELSE 'Very Slow'
-            END as delivery_category,
-            order_count
-        FROM `{self.project_id}.dbt_output.fct_delivery_time_by_zip`
-        WHERE avg_delivery_days IS NOT NULL
-          AND avg_latitude IS NOT NULL
-          AND avg_longitude IS NOT NULL
-          AND state IS NOT NULL
-          AND order_count >= 5
-        ORDER BY avg_delivery_days DESC
-        # LIMIT 1000
+                WHEN r.total_revenue IS NULL THEN 'No Revenue'
+                WHEN r.total_revenue <= 1000 THEN 'Low'
+                WHEN r.total_revenue <= 5000 THEN 'Medium'
+                WHEN r.total_revenue <= 20000 THEN 'High'
+                ELSE 'Very High'
+            END as revenue_category
+        FROM delivery_data d
+        LEFT JOIN revenue_data r ON d.zip_code_prefix = r.zip_code_prefix
+        ORDER BY d.avg_delivery_days DESC
         """
         
         try:
