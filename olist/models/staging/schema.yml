@@ -1,0 +1,75 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Staged customer data with basic transformations
+    columns:
+      - name: customer_id
+        description: Unique customer identifier
+        tests:
+          - unique
+          - not_null
+          - dbt_expectations.expect_column_to_exist
+      
+      - name: zip_code_prefix
+        description: Customer zip code prefix
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1000
+              max_value: 99999
+      
+      - name: state
+        description: Customer state (2-letter code)
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_value_lengths_to_equal:
+              value: 2
+
+  - name: stg_orders
+    description: Staged orders data
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1000
+          max_value: 200000
+    columns:
+      - name: order_id
+        description: Unique order identifier
+        tests:
+          - unique
+          - not_null
+          - dbt_expectations.expect_column_to_exist
+      
+      - name: order_status
+        description: Current status of the order
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              value_set: ['delivered', 'shipped', 'processing', 'canceled', 'unavailable', 'invoiced', 'created', 'approved']
+
+  - name: stg_order_items
+    description: Staged order items data
+    columns:
+      - name: order_id
+        description: Order identifier
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_to_exist
+      
+      - name: price
+        description: Item price
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 10000
+
+  - name: stg_products
+    description: Staged products data
+    columns:
+      - name: product_id
+        description: Unique product identifier
+        tests:
+          - unique
+          - not_null
+          - dbt_expectations.expect_column_to_exist

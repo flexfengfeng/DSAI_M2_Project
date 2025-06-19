@@ -86,3 +86,9 @@ Through EDA analysis, I noticed the delivery time was not consistent across all 
 Based on the analysis, I deisgned schema to calculate the average delivery time for each region. The fact table is the delivery time data, and the dimension tables are the zip code and geolocation data. For geoclocation dataset, it is many to many relationship with zip code, so I used the zip code as the primary key in the geolocation table, for all the latitude and longitude data, I use the average value pair for latitude and longitude for each zip code. 
 
 I tested the idea with jupyter notebook and found it is feasible. Then with the help of Amazon Q assistant, I deisgn and implement the dashboard.
+
+Used dbt_expectation for data validation in the sql query in models.
+
+### Next Steps
+
+To breakdown the analysis into year/quarter/month level, we need to add more dimension to the model.

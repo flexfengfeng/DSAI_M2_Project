@@ -1,0 +1,26 @@
+version: 2
+
+# Basic data quality tests using dbt_expectations
+tests:
+  - name: test_customer_geographic_distribution
+    description: Ensure customers are distributed across multiple states
+    model: ref('stg_customers')
+    test: dbt_expectations.expect_column_distinct_count_to_be_greater_than
+    config:
+      column_name: state
+      value: 5
+
+  - name: test_zip_code_format_consistency
+    description: Ensure zip codes are numeric
+    model: ref('stg_customers')
+    test: dbt_expectations.expect_column_values_to_be_of_type
+    config:
+      column_name: zip_code_prefix
+      column_type: int
+
+  - name: test_order_status_completeness
+    description: Ensure order status is not null
+    model: ref('stg_orders')
+    test: dbt_expectations.expect_column_values_to_not_be_null
+    config:
+      column_name: order_status

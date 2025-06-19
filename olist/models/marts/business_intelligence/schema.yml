@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: customer_analytics
+    description: Customer analytics and metrics
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1000
+          max_value: 200000
+    columns:
+      - name: customer_id
+        description: Unique customer identifier
+        tests:
+          - unique
+          - not_null
+          - dbt_expectations.expect_column_to_exist
+
+  - name: product_performance
+    description: Product performance metrics
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1000
+          max_value: 50000
+    columns:
+      - name: product_id
+        description: Unique product identifier
+        tests:
+          - unique
+          - not_null
+          - dbt_expectations.expect_column_to_exist
