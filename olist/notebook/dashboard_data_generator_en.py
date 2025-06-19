@@ -41,7 +41,7 @@ class DeliveryDashboardDataGenerator:
           AND state IS NOT NULL
           AND order_count >= 5
         ORDER BY avg_delivery_days DESC
-        LIMIT 1000
+        # LIMIT 1000
         """
         
         try:
