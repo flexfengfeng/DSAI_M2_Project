@@ -1,7 +1,7 @@
 ## Preparation
 
-Create the conda environment based on the `environment.yml` file. We will also be using google cloud (for which the account was created in the previous unit) in this lesson.
-
+Create the conda environment based on the `environment.yml` file. 
+We will also be using google cloud acocunt for this project. 
 
 ```
 conda env update -f environment.yml
@@ -11,11 +11,51 @@ pip install -r requirements.txt
 
 Create project in Google Cloud Console
 
-Download the csv files from the course materials, use the data_clean.py script to clean the data.
+Download the csv files from https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
+
+Clean the data with data_clean.py (located in ~/olist/notebook/) script. 
 
 Upload all cleaned csv files to buckets in Google Cloud
 
-Create dataset and tables in BigQuery from the csv files by DBT. 
+```
+#!/bin/bash
+
+# Variables - set these to your values
+LOCAL_DIR="/path/to/your/csvs"
+GCS_BUCKET="your-bucket"
+GCS_PATH="path/in/bucket"  # Optional: folder in the bucket
+
+# Upload all CSV files from the local directory to the GCS bucket
+gsutil cp "$LOCAL_DIR"/*.csv gs://$GCS_BUCKET/$GCS_PATH/
+
+```
+Then load the csv file to BigQuery
+
+```
+#!/bin/bash
+
+# Variables - set these to your values
+PROJECT_ID="your-gcp-project-id"
+DATASET="your_dataset"
+TABLE="your_table"
+GCS_BUCKET="your-bucket"
+GCS_PATH="path/to/csvs"  # Folder in the bucket containing CSVs
+
+# Optional: schema file (remove --autodetect if you use this)
+# SCHEMA="name:STRING,age:INTEGER"
+
+# Load all CSV files in the folder (wildcard)
+
+bq load \
+  --project_id="$PROJECT_ID" \
+  --source_format=CSV \
+  --autodetect \
+  --skip_leading_rows=1 \
+  "$DATASET.$TABLE" \
+  "gs://$GCS_BUCKET/$GCS_PATH/*.csv"
+```
+
+Transform the csv files to tables/views in BigQuery by DBT. 
 
 ### Note: 
 
@@ -26,7 +66,7 @@ The zip code prefix is 5 digits, but if let goolge handle the schema automatical
 There is "customer id" and "customer unique id" fields in the customer dataset, when checked other datasets, only "customer id" field was used, "customer unique id" field could be ignored. 
 
 ```
-dbt init m2_project
+dbt init olist
 ```
 By default, dbt will update the profiles.yml file in the .dbt directory. This can be overridden by profiles.yml in the project directory, in this case, the project directory is m2_project which was created by dbt init.
 
