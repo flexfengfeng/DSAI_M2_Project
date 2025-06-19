@@ -1,0 +1,476 @@
+{
+  "creationTime": "1749706818836",
+  "etag": "fWCeAPxpmBxghmcjHFTHrw==",
+  "id": "brazil-olist:Olist.customer",
+  "kind": "bigquery#table",
+  "lastModifiedTime": "1749805398837",
+  "location": "US",
+  "numActiveLogicalBytes": "9083385",
+  "numActivePhysicalBytes": "7033336",
+  "numBytes": "9083385",
+  "numCurrentPhysicalBytes": "3520282",
+  "numLongTermBytes": "0",
+  "numLongTermLogicalBytes": "0",
+  "numLongTermPhysicalBytes": "0",
+  "numRows": "99441",
+  "numTimeTravelPhysicalBytes": "3513054",
+  "numTotalLogicalBytes": "9083385",
+  "numTotalPhysicalBytes": "7033336",
+  "schema": {
+    "fields": [
+      {
+        "description": "customer id",
+        "mode": "NULLABLE",
+        "name": "customer_id",
+        "type": "STRING"
+      },
+      {
+        "description": "uid, not used",
+        "mode": "NULLABLE",
+        "name": "customer_uid",
+        "type": "STRING"
+      },
+      {
+        "maxLength": "5",
+        "mode": "NULLABLE",
+        "name": "zip_code_prefix",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "city",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "state",
+        "type": "STRING"
+      }
+    ]
+  },
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/brazil-olist/datasets/Olist/tables/customer",
+  "tableReference": {
+    "datasetId": "Olist",
+    "projectId": "brazil-olist",
+    "tableId": "customer"
+  },
+  "type": "TABLE"
+}
+{
+  "creationTime": "1749803191774",
+  "etag": "D79uNxB25ZLsLQuutlHmqQ==",
+  "id": "brazil-olist:Olist.geolocation",
+  "kind": "bigquery#table",
+  "lastModifiedTime": "1749803191774",
+  "location": "US",
+  "numActiveLogicalBytes": "39554930",
+  "numActivePhysicalBytes": "12990008",
+  "numBytes": "39554930",
+  "numCurrentPhysicalBytes": "12990008",
+  "numLongTermBytes": "0",
+  "numLongTermLogicalBytes": "0",
+  "numLongTermPhysicalBytes": "0",
+  "numRows": "1000163",
+  "numTimeTravelPhysicalBytes": "0",
+  "numTotalLogicalBytes": "39554930",
+  "numTotalPhysicalBytes": "12990008",
+  "schema": {
+    "fields": [
+      {
+        "description": "zip code prefix",
+        "maxLength": "5",
+        "mode": "NULLABLE",
+        "name": "zip_code_prefix",
+        "type": "STRING"
+      },
+      {
+        "description": "latitude",
+        "mode": "NULLABLE",
+        "name": "geo_lat",
+        "type": "FLOAT"
+      },
+      {
+        "description": "longitude",
+        "mode": "NULLABLE",
+        "name": "geo_lng",
+        "type": "FLOAT"
+      },
+      {
+        "description": "city",
+        "mode": "NULLABLE",
+        "name": "city",
+        "type": "STRING"
+      },
+      {
+        "description": "state",
+        "mode": "NULLABLE",
+        "name": "state",
+        "type": "STRING"
+      }
+    ]
+  },
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/brazil-olist/datasets/Olist/tables/geolocation",
+  "tableReference": {
+    "datasetId": "Olist",
+    "projectId": "brazil-olist",
+    "tableId": "geolocation"
+  },
+  "type": "TABLE"
+}
+{
+  "creationTime": "1749799930353",
+  "etag": "y4/oERkuYCVFLr7t8FFp3w==",
+  "id": "brazil-olist:Olist.order_items",
+  "kind": "bigquery#table",
+  "lastModifiedTime": "1749799930353",
+  "location": "US",
+  "numActiveLogicalBytes": "15095100",
+  "numActivePhysicalBytes": "3438948",
+  "numBytes": "15095100",
+  "numCurrentPhysicalBytes": "3438948",
+  "numLongTermBytes": "0",
+  "numLongTermLogicalBytes": "0",
+  "numLongTermPhysicalBytes": "0",
+  "numRows": "112650",
+  "numTimeTravelPhysicalBytes": "0",
+  "numTotalLogicalBytes": "15095100",
+  "numTotalPhysicalBytes": "3438948",
+  "schema": {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "order_id",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "order_item_id",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "product_id",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "seller_id",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "shipping_limit_date",
+        "type": "TIMESTAMP"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "price",
+        "type": "FLOAT"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "freight_value",
+        "type": "FLOAT"
+      }
+    ]
+  },
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/brazil-olist/datasets/Olist/tables/order_items",
+  "tableReference": {
+    "datasetId": "Olist",
+    "projectId": "brazil-olist",
+    "tableId": "order_items"
+  },
+  "type": "TABLE"
+}
+{
+  "creationTime": "1749799981284",
+  "etag": "ASVifeo/+ezaemzIUOdU5w==",
+  "id": "brazil-olist:Olist.order_payments",
+  "kind": "bigquery#table",
+  "lastModifiedTime": "1749799981284",
+  "location": "US",
+  "numActiveLogicalBytes": "7252357",
+  "numActivePhysicalBytes": "1922629",
+  "numBytes": "7252357",
+  "numCurrentPhysicalBytes": "1922629",
+  "numLongTermBytes": "0",
+  "numLongTermLogicalBytes": "0",
+  "numLongTermPhysicalBytes": "0",
+  "numRows": "103886",
+  "numTimeTravelPhysicalBytes": "0",
+  "numTotalLogicalBytes": "7252357",
+  "numTotalPhysicalBytes": "1922629",
+  "schema": {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "order_id",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "payment_sequential",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "payment_type",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "payment_installments",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "payment_value",
+        "type": "FLOAT"
+      }
+    ]
+  },
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/brazil-olist/datasets/Olist/tables/order_payments",
+  "tableReference": {
+    "datasetId": "Olist",
+    "projectId": "brazil-olist",
+    "tableId": "order_payments"
+  },
+  "type": "TABLE"
+}
+{
+  "creationTime": "1749801875539",
+  "etag": "Ot87ogje0w2TLktCB2Q6DA==",
+  "id": "brazil-olist:Olist.orders",
+  "kind": "bigquery#table",
+  "lastModifiedTime": "1749801875539",
+  "location": "US",
+  "numActiveLogicalBytes": "11792569",
+  "numActivePhysicalBytes": "5532737",
+  "numBytes": "11792569",
+  "numCurrentPhysicalBytes": "5532737",
+  "numLongTermBytes": "0",
+  "numLongTermLogicalBytes": "0",
+  "numLongTermPhysicalBytes": "0",
+  "numRows": "99441",
+  "numTimeTravelPhysicalBytes": "0",
+  "numTotalLogicalBytes": "11792569",
+  "numTotalPhysicalBytes": "5532737",
+  "schema": {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "order_id",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "customer_id",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "order_status",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "order_purchase_timestamp",
+        "type": "TIMESTAMP"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "order_approved_at",
+        "type": "TIMESTAMP"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "order_delivered_carrier_date",
+        "type": "TIMESTAMP"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "order_delivered_customer_date",
+        "type": "TIMESTAMP"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "order_estimated_delivery_date",
+        "type": "TIMESTAMP"
+      }
+    ]
+  },
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/brazil-olist/datasets/Olist/tables/orders",
+  "tableReference": {
+    "datasetId": "Olist",
+    "projectId": "brazil-olist",
+    "tableId": "orders"
+  },
+  "type": "TABLE"
+}
+{
+  "creationTime": "1749801957921",
+  "etag": "rbZDMw34h1dnCVB0uD2WOQ==",
+  "id": "brazil-olist:Olist.products",
+  "kind": "bigquery#table",
+  "lastModifiedTime": "1749801957921",
+  "location": "US",
+  "numActiveLogicalBytes": "3499346",
+  "numActivePhysicalBytes": "784307",
+  "numBytes": "3499346",
+  "numCurrentPhysicalBytes": "784307",
+  "numLongTermBytes": "0",
+  "numLongTermLogicalBytes": "0",
+  "numLongTermPhysicalBytes": "0",
+  "numRows": "32951",
+  "numTimeTravelPhysicalBytes": "0",
+  "numTotalLogicalBytes": "3499346",
+  "numTotalPhysicalBytes": "784307",
+  "schema": {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "product_id",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "product_category_name",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "product_name_lenght",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "product_description_lenght",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "product_photos_qty",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "product_weight_g",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "product_length_cm",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "product_height_cm",
+        "type": "INTEGER"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "product_width_cm",
+        "type": "INTEGER"
+      }
+    ]
+  },
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/brazil-olist/datasets/Olist/tables/products",
+  "tableReference": {
+    "datasetId": "Olist",
+    "projectId": "brazil-olist",
+    "tableId": "products"
+  },
+  "type": "TABLE"
+}
+BigQuery error in show operation: Not found: Table brazil-olist:Olist.reviews
+{
+  "creationTime": "1749802174879",
+  "etag": "3XvolWz8l/9KLB3BvjguIg==",
+  "id": "brazil-olist:Olist.sellers",
+  "kind": "bigquery#table",
+  "lastModifiedTime": "1749805952423",
+  "location": "US",
+  "numActiveLogicalBytes": "176935",
+  "numActivePhysicalBytes": "131858",
+  "numBytes": "176935",
+  "numCurrentPhysicalBytes": "65332",
+  "numLongTermBytes": "0",
+  "numLongTermLogicalBytes": "0",
+  "numLongTermPhysicalBytes": "0",
+  "numRows": "3095",
+  "numTimeTravelPhysicalBytes": "66526",
+  "numTotalLogicalBytes": "176935",
+  "numTotalPhysicalBytes": "131858",
+  "schema": {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "seller_id",
+        "type": "STRING"
+      },
+      {
+        "maxLength": "5",
+        "mode": "NULLABLE",
+        "name": "zip_code_prefix",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "city",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "state",
+        "type": "STRING"
+      }
+    ]
+  },
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/brazil-olist/datasets/Olist/tables/sellers",
+  "tableReference": {
+    "datasetId": "Olist",
+    "projectId": "brazil-olist",
+    "tableId": "sellers"
+  },
+  "type": "TABLE"
+}
+{
+  "creationTime": "1749806221108",
+  "etag": "gyQ1l+6EMZ2Wl+iQ8+GT0A==",
+  "id": "brazil-olist:Olist.translations",
+  "kind": "bigquery#table",
+  "lastModifiedTime": "1749806221108",
+  "location": "US",
+  "numActiveLogicalBytes": "2684",
+  "numActivePhysicalBytes": "2647",
+  "numBytes": "2684",
+  "numCurrentPhysicalBytes": "2647",
+  "numLongTermBytes": "0",
+  "numLongTermLogicalBytes": "0",
+  "numLongTermPhysicalBytes": "0",
+  "numRows": "72",
+  "numTimeTravelPhysicalBytes": "0",
+  "numTotalLogicalBytes": "2684",
+  "numTotalPhysicalBytes": "2647",
+  "schema": {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "product_category_name",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "product_category_name_english",
+        "type": "STRING"
+      }
+    ]
+  },
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/brazil-olist/datasets/Olist/tables/translations",
+  "tableReference": {
+    "datasetId": "Olist",
+    "projectId": "brazil-olist",
+    "tableId": "translations"
+  },
+  "type": "TABLE"
+}

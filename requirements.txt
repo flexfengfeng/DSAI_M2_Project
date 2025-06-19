@@ -1,0 +1,3 @@
+dbt-core==1.9.2
+dbt-bigquery==1.9.1nbformat>=4.2.0
+ipython
