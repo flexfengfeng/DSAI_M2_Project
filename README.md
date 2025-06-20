@@ -31,10 +31,10 @@ This is an advanced dual-layer web dashboard that provides comprehensive analysi
 ### Method 1: Dual-Layer Dashboard (Recommended)
 ```bash
 cd /Users/fengfeng/Dev/DSAI_M2_Project/olist/notebook
-python3 run_visible_test.py
+python3 run_delivery_revenue_dashboard.py
 ```
 
-### Method 2: Alternative Servers
+### Method 2: Alternative Servers Delivery Time Only
 ```bash
 # City-enabled dashboard
 python3 run_dashboard_with_cities.py
