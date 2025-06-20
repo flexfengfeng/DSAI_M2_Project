@@ -1,8 +1,6 @@
 # Brazil Regional Average Delivery Time Analysis Dashboard
 
-![Dashboard](/Document/delivery%20time%20by%20location.png)
-
-![Dashboard](/Document/revenue%20by%20location.png)
+![Dashboard](/Document/delivery%20time%20rev%20by%20location.png)
 
 ## 📋 Overview
 
