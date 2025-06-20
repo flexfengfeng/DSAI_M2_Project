@@ -451,6 +451,7 @@
                     selectedStates.delete(state);
                 }
             });
+            updateCityFilters();
             updateDashboard();
         }
 
@@ -476,7 +477,29 @@
             } else {
                 selectedStates.add(state);
             }
+            updateCityFilters();
             updateDashboard();
+        }
+
+        function updateCityFilters() {
+            const availableCities = [...new Set(rawData
+                .filter(d => selectedStates.has(d.state))
+                .map(d => d.city))].sort();
+            
+            const cityContainer = document.getElementById('cityFilters');
+            cityContainer.innerHTML = '';
+            
+            selectedCities.clear();
+            availableCities.forEach(city => {
+                selectedCities.add(city);
+                const div = document.createElement('div');
+                div.className = 'checkbox-item';
+                div.innerHTML = `
+                    <input type="checkbox" id="city_${city.replace(/\s+/g, '_')}" checked onchange="toggleCity('${city}')">
+                    <label for="city_${city.replace(/\s+/g, '_')}">${city}</label>
+                `;
+                cityContainer.appendChild(div);
+            });
         }
 
         function toggleCity(city) {
