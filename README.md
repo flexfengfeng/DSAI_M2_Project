@@ -1,6 +1,6 @@
 # Brazil Delivery Time & Revenue Analysis Dashboard
 
-![Dashboard](/Document/delivery%20time%20rev%20by%20location.png)
+![Dashboard](/Document/dashboard.png)
 
 ## 📋 Overview
 
