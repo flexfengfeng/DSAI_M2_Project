@@ -307,6 +307,15 @@
                         🔄 Dual Layer View
                     </button>
                 </div>
+                <div id="deliverySlider" style="display: block; margin: 15px 0; padding: 15px; background: #f8faff; border-radius: 8px;">
+                    <div style="font-weight: bold; margin-bottom: 10px; color: #1a3d7c;">📦 Delivery Time Filter</div>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 14px;">Max Days:</span>
+                        <input type="range" id="maxDeliveryDays" min="1" max="50" value="50" 
+                               style="flex: 1;" oninput="updateDeliveryFilter(this.value)">
+                        <span id="maxDaysValue" style="font-weight: bold; color: #1a3d7c; min-width: 60px;">50 days</span>
+                    </div>
+                </div>
                 <div id="map"></div>
             </div>
 
@@ -331,6 +340,8 @@
         let selectedStates = new Set();
         let selectedCities = new Set();
         let currentMapView = 'delivery';
+        let mapState = { center: { lat: -14.2350, lon: -51.9253 }, zoom: 3.5 };
+        let maxDeliveryDays = 50;
 
         document.addEventListener('DOMContentLoaded', function() {
             loadData();
@@ -480,7 +491,8 @@
         function filterData() {
             filteredData = rawData.filter(d => 
                 selectedStates.has(d.state) && 
-                selectedCities.has(d.city)
+                selectedCities.has(d.city) &&
+                d.avg_delivery_days <= maxDeliveryDays
             );
         }
 
@@ -529,7 +541,17 @@
             document.querySelectorAll('.map-toggle').forEach(btn => btn.classList.remove('active'));
             document.getElementById(view + 'Btn').classList.add('active');
             
+            // Show/hide delivery slider
+            const slider = document.getElementById('deliverySlider');
+            slider.style.display = (view === 'delivery' || view === 'dual') ? 'block' : 'none';
+            
             createMap();
+        }
+
+        function updateDeliveryFilter(value) {
+            maxDeliveryDays = parseInt(value);
+            document.getElementById('maxDaysValue').textContent = value + ' days';
+            updateDashboard();
         }
 
         function createMap() {
@@ -625,15 +647,25 @@
             const layout = {
                 mapbox: {
                     style: 'open-street-map',
-                    center: { lat: -14.2350, lon: -51.9253 },
-                    zoom: 3.5
+                    center: mapState.center,
+                    zoom: mapState.zoom
                 },
                 margin: { t: 0, b: 0, l: 0, r: 0 },
                 height: 500,
                 showlegend: currentMapView === 'dual'
             };
 
-            Plotly.newPlot('map', traces, layout, { responsive: true });
+            Plotly.react('map', traces, layout, { responsive: true });
+            
+            // Add event listener to track map changes
+            document.getElementById('map').on('plotly_relayout', function(eventdata) {
+                if (eventdata['mapbox.center']) {
+                    mapState.center = eventdata['mapbox.center'];
+                }
+                if (eventdata['mapbox.zoom']) {
+                    mapState.zoom = eventdata['mapbox.zoom'];
+                }
+            });
         }
 
         function createCorrelationChart() {
