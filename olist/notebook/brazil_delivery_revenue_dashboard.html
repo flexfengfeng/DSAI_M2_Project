@@ -445,13 +445,11 @@
                     <div id="aggregationLevel" style="position:absolute; bottom:10px; left:10px; z-index:1000; background:white; padding:4px 10px; border-radius:4px; font-size:12px; font-weight:600; color:#374151; box-shadow:0 2px 6px rgba(0,0,0,0.2);">State level</div>
                     <select id="tileStyleSelect" onchange="switchTileStyle(this.value)"
                         style="position:absolute; top:10px; right:10px; z-index:1000; font-size:12px; padding:6px 10px; border-radius:4px; border:1px solid #d1d5db; color:#374151; background:white; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.2);">
-                        <option value="voyager">CartoDB Voyager (default)</option>
-                        <option value="light">CartoDB Light</option>
-                        <option value="dark">CartoDB Dark</option>
-                        <option value="light_nolabels">CartoDB Light (no labels)</option>
-                        <option value="esri_gray">Esri World Gray Canvas</option>
-                        <option value="stadia_smooth">Stadia Alidade Smooth</option>
-                        <option value="osm">OpenStreetMap</option>
+                        <option value="esri_gray">Esri Light Gray (default)</option>
+                        <option value="esri_dark">Esri Dark Gray</option>
+                        <option value="esri_street">Esri Streets</option>
+                        <option value="esri_topo">Esri Topographic</option>
+                        <option value="esri_imagery">Esri Satellite</option>
                     </select>
                 </div>
                 <div id="deliverySlider" style="display: block; margin: 15px 0 0; padding: 16px; background: #f9fafb; border-radius: 4px; border: 1px solid #e5e7eb;">
@@ -787,16 +785,15 @@
         let leafletLayers = { delivery: null, revenue: null };
         let legendControl = null;
         let tileLayer = null;
-        let currentTileStyle = 'voyager';
+        let currentTileStyle = 'esri_gray';
 
         const TILE_STYLES = {
-            voyager:       { url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',           attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap' },
-            light:         { url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',                     attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap' },
-            dark:          { url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',                      attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap' },
-            light_nolabels:{ url: 'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',                attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap' },
-            esri_gray:     { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', attribution: '&copy; <a href="https://www.esri.com/">Esri</a>' },
-            stadia_smooth: { url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',               attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>' },
-            osm:           { url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',                                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }
+            // Esri tiles need no API key (CARTO and OSM now block keyless/local use)
+            esri_gray:    { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', maxNativeZoom: 16, attribution: 'Tiles &copy; <a href="https://www.esri.com/">Esri</a>' },
+            esri_dark:    { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',  maxNativeZoom: 16, attribution: 'Tiles &copy; <a href="https://www.esri.com/">Esri</a>' },
+            esri_street:  { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',             maxNativeZoom: 19, attribution: 'Tiles &copy; <a href="https://www.esri.com/">Esri</a>' },
+            esri_topo:    { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',               maxNativeZoom: 19, attribution: 'Tiles &copy; <a href="https://www.esri.com/">Esri</a>' },
+            esri_imagery: { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',                maxNativeZoom: 19, attribution: 'Tiles &copy; <a href="https://www.esri.com/">Esri</a>' }
         };
 
         function switchTileStyle(style) {
@@ -805,7 +802,7 @@
                 leafletMap.removeLayer(tileLayer);
             }
             const t = TILE_STYLES[style];
-            tileLayer = L.tileLayer(t.url, { attribution: t.attribution, subdomains: 'abcd', maxZoom: 19 });
+            tileLayer = L.tileLayer(t.url, { attribution: t.attribution, maxNativeZoom: t.maxNativeZoom, maxZoom: 19 });
             tileLayer.addTo(leafletMap);
             tileLayer.bringToBack();
         }
@@ -870,7 +867,7 @@
             if (!leafletMap) {
                 leafletMap = L.map('map', { zoomControl: true }).setView([-14.235, -51.925], 4);
                 const t = TILE_STYLES[currentTileStyle];
-                tileLayer = L.tileLayer(t.url, { attribution: t.attribution, subdomains: 'abcd', maxZoom: 19 });
+                tileLayer = L.tileLayer(t.url, { attribution: t.attribution, maxNativeZoom: t.maxNativeZoom, maxZoom: 19 });
                 tileLayer.addTo(leafletMap);
                 leafletMap.on('zoomend', updateMapLayers);
             }

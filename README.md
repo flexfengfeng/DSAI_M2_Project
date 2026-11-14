@@ -21,21 +21,20 @@ Opens at **http://localhost:8004/brazil_delivery_revenue_dashboard.html**. Press
 
 - **Three view modes** — Delivery Time, Revenue, and Dual Layer
 - **Dual Layer view**: outer colored ring = delivery speed, inner solid circle = revenue
-- **Zoom-based aggregation** — automatically switches between aggregation levels as you zoom:
-  | Zoom | Level |
-  |------|-------|
-  | < 7  | State |
-  | 7–10 | City  |
+- **Zoom-based aggregation** — automatically switches between aggregation levels as you zoom:| Zoom  | Level    |
+  | ----- | -------- |
+  | < 7   | State    |
+  | 7–10 | City     |
   | ≥ 11 | Zip code |
 - **7 map tile styles** — selectable from a dropdown in the top-right corner of the map (CartoDB Voyager, Light, Dark, Esri Gray, Stadia Smooth, OpenStreetMap, and more)
 - **Aggregation level badge** — bottom-left corner always shows the current zoom level
 
 ### Color Schemes
 
-| Layer | Colors | Meaning |
-|-------|--------|---------|
+| Layer         | Colors                           | Meaning                         |
+| ------------- | -------------------------------- | ------------------------------- |
 | Delivery Time | Green → Yellow → Orange → Red | ≤7 / 8–14 / 15–21 / >21 days |
-| Revenue | Light blue → Dark navy | Low → High revenue |
+| Revenue       | Light blue → Dark navy          | Low → High revenue             |
 
 ### Filters (Left Panel)
 
@@ -46,11 +45,14 @@ Opens at **http://localhost:8004/brazil_delivery_revenue_dashboard.html**. Press
 ### Charts
 
 #### Delivery vs Revenue Correlation
+
 Scatter plot of delivery days vs revenue per zip code region. Includes a linear regression trend line showing:
+
 - **Slope** — revenue change per extra delivery day
 - **R²** — how much of revenue variance is explained by delivery time alone
 
 #### Regional Performance Score
+
 Horizontal bar chart of the top 10 and bottom 10 regions ranked by a composite score:
 
 ```
@@ -65,14 +67,14 @@ All metrics, charts, and controls include inline descriptions so viewers can und
 
 ## Technical Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Data warehouse | BigQuery |
-| Transformation | dbt (staging → intermediate → marts) |
-| Map | Leaflet.js |
-| Charts | Plotly.js |
-| Frontend | Vanilla HTML/CSS/JavaScript |
-| Data fallback | Sample data generated in-browser when BigQuery unavailable |
+| Layer          | Technology                                                 |
+| -------------- | ---------------------------------------------------------- |
+| Data warehouse | BigQuery                                                   |
+| Transformation | dbt (staging → intermediate → marts)                     |
+| Map            | Leaflet.js                                                 |
+| Charts         | Plotly.js                                                  |
+| Frontend       | Vanilla HTML/CSS/JavaScript                                |
+| Data fallback  | Sample data generated in-browser when BigQuery unavailable |
 
 ## Data Pipeline
 
@@ -101,12 +103,12 @@ olist/notebook/
 
 ## Troubleshooting
 
-| Issue | Fix |
-|-------|-----|
-| Blank map / no circles | Check browser console; verify `dashboard_data.json` exists |
-| City filter empty | Select at least one state first |
-| Circles not visible in dual view | Zoom in — at low zoom only the outer delivery ring may be visible |
-| Slow rendering | Use state/city filters or the delivery time range slider to reduce data volume |
+| Issue                            | Fix                                                                            |
+| -------------------------------- | ------------------------------------------------------------------------------ |
+| Blank map / no circles           | Check browser console; verify `dashboard_data.json` exists                   |
+| City filter empty                | Select at least one state first                                                |
+| Circles not visible in dual view | Zoom in — at low zoom only the outer delivery ring may be visible             |
+| Slow rendering                   | Use state/city filters or the delivery time range slider to reduce data volume |
 
 ### Verify data file
 

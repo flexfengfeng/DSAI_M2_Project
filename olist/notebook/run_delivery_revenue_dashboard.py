@@ -16,6 +16,7 @@ def start_server():
             self.send_header('Access-Control-Allow-Origin', '*')
             super().end_headers()
     
+    socketserver.TCPServer.allow_reuse_address = True
     with socketserver.TCPServer(("", 8004), Handler) as httpd:
         print("🚀 Delivery Time & Revenue Dashboard running at http://localhost:8004")
         print("📊 URL: http://localhost:8004/brazil_delivery_revenue_dashboard.html")
